@@ -1,0 +1,1 @@
+Set-LocalUser -PasswordNeverExpires $true -Name "labansible"

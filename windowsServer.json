@@ -1,0 +1,109 @@
+{
+    "builders": [
+      {
+        "CPUs": 2,
+        "RAM": 8192,
+        "RAM_reserve_all": false,
+        "boot_order": "disk,cdrom",
+        "cluster": "{{user `cluster`}}",
+        "communicator": "winrm",
+        "create_snapshot": "false",
+        "datastore": "{{user `datastore`}}",
+        "disk_controller_type": "pvscsi",
+        "floppy_dirs": [
+          "./floppyscripts",
+          "./drivers",
+          "./postdeployscripts"
+        ],
+        "floppy_files": [
+          "./answerfiles/2016",
+          "./floppy"
+        ],
+        "guest_os_type": "windows9Server64Guest",
+        "insecure_connection": "true",
+        "iso_paths": [
+          "[{{user `datastore_iso`}}] ISOs/en-windows_server_2016_vl_x64_dvd_11636701.iso"
+        ],
+        "name": "server2016",
+        "network_adapters": [
+          {
+            "network": "{{user `network`}}",
+            "network_card": "vmxnet3"
+          }
+        ],
+        "password": "{{user `password`}}",
+        "storage": [
+          {
+            "disk_size": 71680,
+            "disk_thin_provisioned": true
+          }
+        ],
+        "type": "vsphere-iso",
+        "username": "{{user `username`}}",
+        "vcenter_server": "{{user `vcenter_server`}}",
+        "vm_name": "server2016_Packer",
+        "vm_version": 15,
+        "winrm_password": "{{user `winrm_password`}}",
+        "winrm_username": "{{user `winrm_username`}}"
+      },
+      {
+        "CPUs": 2,
+        "RAM": 8192,
+        "RAM_reserve_all": false,
+        "boot_order": "disk,cdrom",
+        "cluster": "{{user `cluster`}}",
+        "communicator": "winrm",
+        "create_snapshot": "false",
+        "datastore": "{{user `datastore`}}",
+        "disk_controller_type": "pvscsi",
+        "floppy_dirs": [
+          "./floppyscripts",
+          "./drivers",
+          "./postdeployscripts"
+        ],
+        "floppy_files": [
+          "./answerfiles/2019",
+          "./floppy"
+        ],
+        "guest_os_type": "windows9Server64Guest",
+        "insecure_connection": "true",
+        "iso_paths": [
+          "[{{user `datastore_iso`}}] ISOs/en_windows_server_2019_updated_sept_2019_x64_dvd_199664ce.iso"
+        ],
+        "name": "server2019",
+        "network_adapters": [
+          {
+            "network": "{{user `network`}}",
+            "network_card": "vmxnet3"
+          }
+        ],
+        "password": "{{user `password`}}",
+        "storage": [
+          {
+            "disk_size": 71680,
+            "disk_thin_provisioned": true
+          }
+        ],
+        "type": "vsphere-iso",
+        "username": "{{user `username`}}",
+        "vcenter_server": "{{user `vcenter_server`}}",
+        "vm_name": "server2019_Packer",
+        "vm_version": 15,
+        "winrm_password": "{{user `winrm_password`}}",
+        "winrm_username": "{{user `winrm_username`}}"
+      }
+    ],
+    "provisioners": [
+      {
+        "scripts": [
+          "./postscripts/stagesysprep.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "type": "windows-restart"
+      }
+    ]
+  }
+  
+  
