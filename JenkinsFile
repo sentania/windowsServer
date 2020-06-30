@@ -1,0 +1,12 @@
+node () {
+
+deleteDir()
+
+      stage ('Checkout Build Code') {
+         checkout scm
+       }
+        stage ('Build Image') {
+        sh '/usr/local/bin/packer.1.6.0 build -var-file variables.json windowsServer.json'
+        }
+    }
+}
