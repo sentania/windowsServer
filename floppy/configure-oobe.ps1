@@ -7,17 +7,21 @@
 
 #This script also has the important job of setting WinRM to disabled at the beginning
 
-netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=block
-netsh advfirewall firewall set rule group="Windows Remote Management" new enable=yes
-$winrmService = Get-Service -Name WinRM
-if ($winrmService.Status -eq "Running"){
-    Disable-PSRemoting -Force
-}
-Stop-Service winrm
-Set-Service -Name winrm -StartupType Disabled
-
-
-
 Get-ChildItem 'A:\floppyscripts\*.ps1' | ForEach-Object {
   & $_.FullName
 }
+$ErrorActionPreference = "Stop"
+
+# Switch network connection to private mode
+# Required for WinRM firewall rules
+$profile = Get-NetConnectionProfile
+Set-NetConnectionProfile -Name $profile.Name -NetworkCategory Private
+
+# Enable WinRM service
+winrm quickconfig -quiet
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'
+
+# Reset auto logon count
+# https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-autologon-logoncount#logoncount-known-issue
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoLogonCount -Value 0

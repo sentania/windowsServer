@@ -76,8 +76,8 @@
                     <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
-                <FullName>Infrastructure and Operations</FullName>
-                <Organization>Northwestern Mutual</Organization>
+                <FullName>Home Lab</FullName>
+                <Organization>sentania.net</Organization>
             </UserData>
         </component>
     </settings>
@@ -86,7 +86,7 @@
             <OEMInformation>
                 <HelpCustomized>false</HelpCustomized>
             </OEMInformation>
-            <ComputerName>nmimage-2016</ComputerName>
+            <ComputerName>sentania-2019</ComputerName>
             <TimeZone>Central Standard Time</TimeZone>
             <RegisteredOwner/>
         </component>

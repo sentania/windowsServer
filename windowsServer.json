@@ -99,9 +99,6 @@
           "./postscripts/stagesysprep.ps1"
         ],
         "type": "powershell"
-      },
-      {
-        "type": "windows-restart"
       }
     ]
   }
