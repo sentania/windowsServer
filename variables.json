@@ -2,7 +2,7 @@
     "vcenter_server":"vcenter.int.sentania.net",
     "username":"administrator@vsphere.local",
     "password":"p0w3R2win!",
-    "datastore":"pithos-vm",
+    "datastore":"vsanDatastore",
     "datastore_iso": "vsanDatastore",
     "cluster": "Cluster 1",
     "network": "VLAN1100 10.100.100.0_24",
