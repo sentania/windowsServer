@@ -8,7 +8,7 @@ deleteDir()
         withCredentials([usernamePassword(credentialsId: 'vcenter_admin',
         usernameVariable: 'vCenterUsername', passwordVariable: 'vCenterPassword')]){
         stage ('Build Image') {
-        sh '/usr/local/bin/packer.1.6.0 build -only server2019 -var-file variables.json -on-error=abort windowsServer.json'
+        sh '/usr/local/bin/packer.1.6.0 build -only server2019 -var-file variables.json windowsServer.json'
         }
         
         stage ('Upload Image') {
