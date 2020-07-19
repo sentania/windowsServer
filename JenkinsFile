@@ -5,10 +5,14 @@ deleteDir()
       stage ('Checkout Build Code') {
          checkout scm
        }
+        withCredentials([usernamePassword(credentialsId: 'vcenter_admin',
+        usernameVariable: 'vCenterUsername', passwordVariable: 'vCenterPassword')]){
         stage ('Build Image') {
         sh '/usr/local/bin/packer.1.6.0 build -only server2019 -var-file variables.json windowsServer.json'
         }
+        
         stage ('Upload Image') {
-        sh '/bin/pwsh deploy_image.ps1 -vsphereUSERNAME administrator@vsphere.local -vspherePassword p0w3R2win! -sourceVM server2019_Packer'
+        sh '/bin/pwsh deploy-image.ps1 -vsphereUSERNAME $vCenterUsername -vspherePassword $vCenterPassword -sourceVM server2019_Packer'
         }
+}
     }

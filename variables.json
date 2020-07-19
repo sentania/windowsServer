@@ -3,8 +3,8 @@
     "username":"administrator@vsphere.local",
     "password":"p0w3R2win!",
     "datastore":"pithos-vm",
-    "datastore_iso": "pithos-admin",
-    "cluster": "Cluster 2",
+    "datastore_iso": "vsanDatastore",
+    "cluster": "Cluster 1",
     "network": "VLAN1100 10.100.100.0_24",
     "winrm_username": "labansible",
     "winrm_password": "labansible"
