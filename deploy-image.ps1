@@ -8,10 +8,10 @@ Connect-VIServer -Server vcenter.int.sentania.net -User $vSphereUSERNAME -Passwo
 
 $sourceVMobj = get-vm -Name $sourceVM
 
-Export-VM -Destination /tmp/ -Format Ova -VM $sourceVMobj -Name server2019.ova
+Export-VM -Destination /tmp/ -Format Ova -VM $sourceVMobj -Name server2019
 
 $contentlibraryitem = @{
-    ContentLibrary = Get-ContentLibrary -name "sentania.net"
+    ContentLibrary = Get-ContentLibrary -name "vcenter.int.sentania.net"
     File = get-item -path "/tmp/server2019.ova"
     name = "packertest"
 }
