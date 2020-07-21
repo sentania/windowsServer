@@ -13,7 +13,7 @@ Export-VM -Destination /tmp/ -Format Ova -VM $sourceVMobj -Name server2019
 $contentlibraryitem = @{
     ContentLibrary = Get-ContentLibrary -name "vcenter.int.sentania.net"
     File = get-item -path "/tmp/server2019.ova"
-    name = "packertest"
+    name = "server2019"
 }
 New-ContentLibraryItem @contentlibraryitem
 Remove-Item /tmp/server2019.ova -Confirm:$false
