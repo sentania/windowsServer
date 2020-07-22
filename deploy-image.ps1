@@ -83,33 +83,35 @@ Function Add-LibraryItem {
 		{
 			#before creating the library item - we have to determine if it exists
 			$ContentLibraryItemService = Get-CisService com.vmware.content.library.item
-			$libaryItemIDs = $ContentLibraryItemService.list($library_ID)
-			foreach( $libaryItemID in $libaryItemIDs)
+			$libraryItemIDs = $ContentLibraryItemService.list($library_ID)
+			foreach( $libraryItemID in $libraryItemIDs)
 			{
-				$libraryItem = $ContentLibraryItemService.get($libaryItemID)
+				$libraryItem = $ContentLibraryItemService.get($libraryItemID)
 				if ($libraryItem.name -eq $LibItemName) 
 				{
 					Write-host "Library Item Exists"
-					$libraryItem_id = $libraryItemId
+          			$libraryItemId = $libraryItem.id
 					$Update_LibraryItem = $TRUE
 					break
 				}
 			}		
+      if ($Update_LibraryItem -eq $false)
+      {
+        #The Content library Item does not exist, we must create it
+        $ContentLibraryItemService  = Get-CisService "com.vmware.content.library.item"
+        $UniqueChangeId = [guid]::NewGuid().tostring()
+    
+        $createItemSpec = $ContentLibraryItemService.Help.create.create_spec.Create()
+        $createItemSpec.type = $Libtype
+        $createItemSpec.library_id = $library_ID
+        $createItemSpec.name = $LibItemName
+        
+        write-host "Creating Library Item -- " $LibItemName
+        $libraryItemId = $ContentLibraryItemService.create($UniqueChangeId,$createItemSpec)
+        write-host "Library item is created with ID -- " $libraryItemId
+        
+      }
 
-			if ($Update_LibraryItem -eq $FALSE)
-			{
-			$ContentLibraryItemService  = Get-CisService "com.vmware.content.library.item"
-			$UniqueChangeId = [guid]::NewGuid().tostring()
-	
-			$createItemSpec = $ContentLibraryItemService.Help.create.create_spec.Create()
-			$createItemSpec.type = $Libtype
-			$createItemSpec.library_id = $library_ID
-			$createItemSpec.name = $LibItemName
-			
-			write-host "Creating Library Item -- " $LibItemName
-			$libraryItemId = $ContentLibraryItemService.create($UniqueChangeId,$createItemSpec)
-			write-host "Library item is created with ID -- " $libraryItemId
-			
 			if (!$libraryItemId) 
 			{
 					write-host -ForegroundColor red "Failed to create Library item"
@@ -195,7 +197,7 @@ Function Add-LibraryItem {
 							Write-Host $ContentLibraryUpdateSession.get($newSessionId).State
 					}
 			}
-			}
+			
 		}
 }
 
@@ -210,5 +212,15 @@ Disconnect-VIServer -Server $vCConnection -Confirm:$false
 $cisServerConnection = Connect-CisServer -Server vcenter.int.sentania.net -User $vSphereUSERNAME -Password $vSpherePASSWORD
 
 Add-LibraryItem -LibraryName 'vcenter.int.sentania.net' -LibType ova -LibItemName server2019 -SourceType PUSH -LibItemURLPath '/tmp/server2019.ova'
+
+Disconnect-CisServer -Server $cisServerConnection -Confirm:$false
+
+$cisServerConnection = Connect-CisServer -Server lab-vcf-w01-vc.lab.sentania.net -User $vSphereUSERNAME -Password $vSpherePASSWORD
+
+$ContentLibraryService = Get-CisService com.vmware.content.library
+$contentlibrarysubscribedService = Get-CisService com.vmware.content.subscribed_library
+$libraryID = $ContentLibraryService.list().value
+$contentlibrarysubscribedService.sync($libraryID)
+$contentlibrarysubscribedService.sync($libraryID)
 
 Disconnect-CisServer -Server $cisServerConnection -Confirm:$false
