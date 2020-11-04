@@ -8,11 +8,11 @@ deleteDir()
         withCredentials([usernamePassword(credentialsId: 'vcenter_admin',
         usernameVariable: 'vCenterUsername', passwordVariable: 'vCenterPassword')]){
         stage ('Build Image') {
-        sh '/usr/local/bin/packer.1.6.0 build -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
+        sh '/usr/local/bin/packer.1.6.3 build -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
         }
         
-        stage ('Upload Image') {
-        sh '/bin/pwsh deploy-image.ps1 -vsphereUSERNAME $vCenterUsername -vspherePassword $vCenterPassword -sourceVM server2019_Packer'
+        stage ('Sync Content Library') {
+        sh '/bin/pwsh sync-contentlibrary.ps1 -vsphereUSERNAME $vCenterUsername -vspherePassword $vCenterPassword'
         }
 }
     }

@@ -1,0 +1,2 @@
+lab-mgmt01-vcenter.int.sentania.net
+lab-comp01-vcenter.int.sentania.net

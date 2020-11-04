@@ -3,6 +3,11 @@
       {
         "CPUs": 2,
         "RAM": 8192,
+        "content_library_destination" : {
+          "library": "vcenter.int.sentania.net",
+          "ovf": true,
+          "name" : "server2016"
+      },
         "RAM_reserve_all": false,
         "boot_order": "disk,cdrom",
         "cluster": "{{user `cluster`}}",
@@ -22,7 +27,7 @@
         "guest_os_type": "windows9Server64Guest",
         "insecure_connection": "true",
         "iso_paths": [
-          "[{{user `datastore_iso`}}] 099e005f-63fe-e57b-eb99-00266cfb8828/92551fe2-c404-45ee-9520-2d8b30493cb6/en_windows_server_2019_updated_sept_2019_x64_dvd_199664ce_34254342-6fd4-43bb-97f2-654aa6b5985b.iso"
+          "vcenter.int.sentania.net/windows2016"
         ],
         "name": "server2016",
         "network_adapters": [
@@ -49,6 +54,11 @@
       {
         "CPUs": 2,
         "RAM": 8192,
+        "content_library_destination" : {
+          "library": "vcenter.int.sentania.net",
+          "ovf": true,
+          "name" : "server2019"
+      },
         "RAM_reserve_all": false,
         "boot_order": "disk,cdrom",
         "cluster": "{{user `cluster`}}",
@@ -68,7 +78,7 @@
         "guest_os_type": "windows9Server64Guest",
         "insecure_connection": "true",
         "iso_paths": [
-          "[{{user `datastore_iso`}}] 099e005f-63fe-e57b-eb99-00266cfb8828/92551fe2-c404-45ee-9520-2d8b30493cb6/en_windows_server_2019_updated_sept_2019_x64_dvd_199664ce_34254342-6fd4-43bb-97f2-654aa6b5985b.iso"
+          "vcenter.int.sentania.net/windows2019"
         ],
         "name": "server2019",
         "network_adapters": [
