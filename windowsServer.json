@@ -27,7 +27,7 @@
         "guest_os_type": "windows9Server64Guest",
         "insecure_connection": "true",
         "iso_paths": [
-          "vcenter.int.sentania.net/windows2016"
+          "vcenter.int.sentania.net/server2016/en_windows_server_2016_vl_x64_dvd_11636701.iso"
         ],
         "name": "server2016",
         "network_adapters": [
@@ -78,7 +78,7 @@
         "guest_os_type": "windows9Server64Guest",
         "insecure_connection": "true",
         "iso_paths": [
-          "vcenter.int.sentania.net/windows2019"
+          "vcenter.int.sentania.net/windows2019/en_windows_server_2019_updated_sept_2019_x64_dvd_199664ce.iso"
         ],
         "name": "server2019",
         "network_adapters": [
