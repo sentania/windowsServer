@@ -15,7 +15,7 @@ deleteDir()
         withCredentials([usernamePassword(credentialsId: 'vcenter_admin',
         usernameVariable: 'vCenterUsername', passwordVariable: 'vCenterPassword')]){
         stage ('Build Image') {
-        sh './packer build  build -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
+        sh './packer build  -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
         }
         
         stage ('Sync Content Library') {
