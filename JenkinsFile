@@ -5,10 +5,17 @@ deleteDir()
       stage ('Checkout Build Code') {
          checkout scm
        }
+      stage ('Checkout Build Code') {
+         checkout scm
+       }
+      stage ('Download Packer') {
+        sh 'wget https://releases.hashicorp.com/packer/1.7.0/packer_1.7.0_linux_amd64.zip'
+        sh 'unzip packer_1.7.0_linux_amd64.zip'
+      }
         withCredentials([usernamePassword(credentialsId: 'vcenter_admin',
         usernameVariable: 'vCenterUsername', passwordVariable: 'vCenterPassword')]){
         stage ('Build Image') {
-        sh '/usr/local/bin/packer.1.6.3 build -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
+        sh './packer build  build -only server2019 -on-error=abort -var-file variables.json windowsServer.json'
         }
         
         stage ('Sync Content Library') {
