@@ -1,6 +1,6 @@
 ﻿$ProgressPreference = "SilentlyContinue"
-$package = "VMware-tools-11.1.0-16036546-x86_64.exe"
-$version = "11.1.0"
+$package = "VMware-tools-windows-11.2.6-17901274.iso"
+$version = "11.2.6"
 $url = "https://packages.vmware.com/tools/releases/$version/windows/x64/$package"
 $exe = "$Env:TEMP\$package"
 
