@@ -1,8 +1,10 @@
 ﻿$ProgressPreference = "SilentlyContinue"
-$package = "VMware-tools-windows-11.2.6-17901274.iso"
+$package = "VMware-tools-11.2.6-17901274-x86_64.exe"
 $version = "11.2.6"
 $url = "https://packages.vmware.com/tools/releases/$version/windows/x64/$package"
 $exe = "$Env:TEMP\$package"
+Write-Output "***** Downloading VMware Tools"
+Write-Output "***** Download URL: $url"
 
 Write-Output "***** Downloading VMware Tools"
 $wc = New-Object System.Net.WebClient
