@@ -29,6 +29,7 @@ $httpsOptions = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationChe
 
 $httpsResult = New-PSSession -UseSSL -ComputerName "localhost" -SessionOption $httpsOptions -ErrorVariable httpsError -ErrorAction SilentlyContinue
 
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 if ($httpResult)
 {
     Write-host "http acess wasn't disabled"
