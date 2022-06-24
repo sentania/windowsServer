@@ -159,19 +159,19 @@
             </OOBE>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>labansible</Value>
+                    <Value>labuser</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>labansible</Value>
+                            <Value>labuser</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Group>administrators</Group>
-                        <DisplayName>labansible</DisplayName>
-                        <Name>labansible</Name>
-                        <Description>labansible User</Description>
+                        <DisplayName>labuser</DisplayName>
+                        <Name>labuser</Name>
+                        <Description>labuser User</Description>
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>
